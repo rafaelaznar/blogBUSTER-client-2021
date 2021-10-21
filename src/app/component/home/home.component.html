@@ -1,0 +1,44 @@
+<app-menu></app-menu>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="text-center">
+                <h1><i class="fas fa-kiwi-bird"></i> </h1>
+                <h1>Bienvendos a {{title}}</h1>
+                <h6 class="text-muted text-monospace">Aplicación básica en Angular</h6>
+                <h6 class="text-muted text-monospace">Cliente de autenticación para servidor miriase</h6>
+                <h6 class="text-muted text-monospace">Enrutamiento de cliente</h6>
+                <h6 class="text-muted text-monospace">Validación con formulario reactivo</h6>
+                <h6 class="text-muted text-monospace">CORS</h6>
+                <h6 class="text-muted text-monospace">Llamadas AJAX al servidor miriase con RxJS</h6>
+                <h6 class="text-muted text-monospace">Control de la sesión AJAX check con localstorage</h6>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <h6>Conexión del control y la plantilla del componente HomeComponent</h6>
+        <p>Prueba de que angular funciona 9+6={{9+6}} (INTERPOLACIÓN)</p>
+        <p>Titulo de la aplicación web: {{title}}</p>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">CAJA:</label>
+        <div class="col-sm-9">
+            <input [ngModel]="title" type="text" class="form-control mb-3" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">SALCHICHA EN CAJA:</label>
+        <div class="col-sm-9">
+            <input [(ngModel)]="title" type="text" class="form-control mb-3" />
+        </div>
+    </div>
+    <div class="row mb-3 justify-content-center">
+        <div class="col-auto">
+            <button (click)="reset()" class="btn btn-primary mb-3"><i class="fas fa-hotdog"></i>
+                RESET (SALCHICHA)
+            </button>
+        </div>
+    </div>
+</div>

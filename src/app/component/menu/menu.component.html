@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><i class="fas fa-kiwi-bird"></i> blogBUSTER-client-2021</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" [class.active]="strUrl=='/home'" aria-current="page" [routerLink]="['/home']"><i class="fas fa-home"></i>
+                        Home</a>
+                </li>
+                <li class="nav-item" *ngIf="!strUsuarioSession">
+                    <a class="nav-link" [class.active]="strUrl=='/login'" [routerLink]="['/login']"><i class="fas fa-sign-in-alt"></i> Login</a>
+                </li>
+                <li class="nav-item" *ngIf="strUsuarioSession">
+                    <a class="nav-link" [class.active]="strUrl=='/logout'" [routerLink]="['/logout']"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </li>
+                <li class="nav-item" *ngIf="strUsuarioSession">
+                    <a class="nav-link" [class.active]="strUrl=='/secret'" [routerLink]="['/secret']"><i class="fas fa-key"></i> Secret</a>
+                </li>
+            </ul>
+            <span class="navbar-text" *ngIf="strUsuarioSession"><i class="fas fa-user"></i> Usuario: {{strUsuarioSession}} </span>
+        </div>
+    </div>
+</nav>

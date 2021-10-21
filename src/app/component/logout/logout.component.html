@@ -1,0 +1,18 @@
+<app-menu></app-menu>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-4 mt-5">
+            <h1>Salida del sistema</h1>
+            <h4 class="text-muted text-monospace mt-5">Actualmente está logueado en el sistema como "{{strUsuarioSession}}"
+            </h4>
+            <h6 class="text-muted text-monospace mt-5">¿Está seguro de que quiere salir de la sesión?</h6>
+            <div class="mt-5">
+                <button class="btn btn-warning float-end mx-1" (click)="closeSession()"><i
+                    class="fas fa-sign-out-alt"></i> Salir de la sesión</button>
+                <button class="btn btn-primary float-end mx-1" (click)="goBack()"><i
+                        class="fas fa-arrow-circle-left"></i> Volver </button>
+            </div>
+        </div>
+    </div>
+</div>
