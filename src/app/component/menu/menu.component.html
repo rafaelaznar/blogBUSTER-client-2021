@@ -20,6 +20,10 @@
                 <li class="nav-item" *ngIf="strUsuarioSession">
                     <a class="nav-link" [class.active]="strUrl=='/secret'" [routerLink]="['/secret']"><i class="fas fa-key"></i> Secret</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" [class.active]="strUrl=='/plist'" [routerLink]="['/plist']"><i class="fas fa-key"></i> Posts</a>
+                </li>
+
             </ul>
             <span class="navbar-text" *ngIf="strUsuarioSession"><i class="fas fa-user"></i> Usuario: {{strUsuarioSession}} </span>
         </div>

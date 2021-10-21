@@ -9,11 +9,11 @@ import { catchError, retry, shareReplay, tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class SessionService {
+export class PostService {
 
   constructor(private http: HttpClient) { }
 
-  sURL = API_URL + '/session';
+  sURL = API_URL + '/post';
 
   onCheck = new EventEmitter<any>();
 
@@ -27,7 +27,7 @@ export class SessionService {
       // Server-side errors
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
       if (environment) console.log("SessionService: error: " + errorMessage);
-    }    
+    }
     return throwError(errorMessage);
   }
 
@@ -46,10 +46,15 @@ export class SessionService {
       catchError(this.handleError));
   }
 
-  check(): Observable<String> {
-    return this.http.get<String>(this.sURL, httpOptions)
+  getPage(rpp: number, page: number): Observable<any> {
+    if (environment) console.log("SessionService: getPage");
+    return this.http.get<String>(this.sURL + "?rpp=" + rpp + "&page=" + page, httpOptions).pipe(
+      tap((u: String) => console.log("session.service check HTTP request executed: ", u)),
+      shareReplay(),
+      catchError(this.handleError)
+    )
   }
 
-  //aqui va el getSecret ...
+
 
 }

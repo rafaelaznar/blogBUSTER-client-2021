@@ -12,6 +12,8 @@ import { MenuComponent } from './component/menu/menu.component';
 import { SessionService } from './service/session.service';
 import { HttpClientModule } from "@angular/common/http";
 import { SessionResolver } from './resolve/session.resolve';
+import { PlistComponent } from './component/post/plist/plist.component';
+import { PostService } from './service/post.service';
 
 
 @NgModule({
@@ -21,7 +23,8 @@ import { SessionResolver } from './resolve/session.resolve';
     HomeComponent,
     SecretComponent,
     LogoutComponent,
-    MenuComponent
+    MenuComponent,
+    PlistComponent
   ],
   imports: [
     HttpClientModule,
@@ -30,7 +33,11 @@ import { SessionResolver } from './resolve/session.resolve';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [SessionService,SessionResolver],
+  providers: [
+    SessionService,
+    SessionResolver,
+    PostService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

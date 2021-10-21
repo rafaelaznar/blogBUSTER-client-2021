@@ -18,7 +18,7 @@ export const environment = {
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
 
 
-export const API_URL: string = "http://localhost:8081/pusaldo";
+export const API_URL: string = "http://localhost:8081/blogbuster2021";
 
 export const httpOptions = {
   headers: new HttpHeaders({
