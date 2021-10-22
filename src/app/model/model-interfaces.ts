@@ -24,3 +24,9 @@ export interface IPost {
     etiquetas: string,
     visible: boolean
 }
+
+export interface IPage {
+    content: IPost[];
+    totalElements: number,
+    totalPages: number
+}

@@ -5,6 +5,7 @@ import { API_URL, environment, httpOptions } from 'src/environments/environment'
 
 
 import { catchError, retry, shareReplay, tap } from 'rxjs/operators';
+import { IPage } from '../model/model-interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -46,13 +47,8 @@ export class PostService {
       catchError(this.handleError));
   }
 
-  getPage(rpp: number, page: number): Observable<any> {
-    if (environment) console.log("SessionService: getPage");
-    return this.http.get<String>(this.sURL + "?rpp=" + rpp + "&page=" + page, httpOptions).pipe(
-      tap((u: String) => console.log("session.service check HTTP request executed: ", u)),
-      shareReplay(),
-      catchError(this.handleError)
-    )
+  getPage(rpp: number, page: number): Observable<IPage> {    
+    return this.http.get<IPage>(this.sURL + "?rpp=" + rpp + "&page=" + page, httpOptions);
   }
 
 

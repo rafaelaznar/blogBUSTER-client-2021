@@ -1,3 +1,4 @@
+import { PaginationService } from './service/pagination.service';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -36,7 +37,8 @@ import { PostService } from './service/post.service';
   providers: [
     SessionService,
     SessionResolver,
-    PostService
+    PostService,
+    PaginationService
   ],
   bootstrap: [AppComponent]
 })
