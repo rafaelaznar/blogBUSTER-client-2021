@@ -22,6 +22,19 @@
             </nav>
 
 
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Registros por página: {{pageSize}}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" (click)="pageSize=10;getPage()">10</a></li>
+                    <li><a class="dropdown-item" (click)="pageSize=50;getPage()">50</a></li>
+                    <li><a class="dropdown-item" (click)="pageSize=100;getPage()">100</a></li>
+                    <li><a class="dropdown-item" (click)="pageSize=1000;getPage()">1000</a></li>
+                </ul>
+            </div>
+
 
 
             <table class="table table-striped table-hover">
