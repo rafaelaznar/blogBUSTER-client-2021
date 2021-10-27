@@ -16,6 +16,7 @@ import { SessionResolver } from './resolve/session.resolve';
 import { PlistComponent } from './component/post/plist/plist.component';
 import { PostService } from './service/post.service';
 import { TrimPipe } from './pipe/trim.pipe';
+import { showDateTimePipe } from './pipe/showDateTime.pipe';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { TrimPipe } from './pipe/trim.pipe';
     LogoutComponent,
     MenuComponent,
     PlistComponent,
-    TrimPipe
+    TrimPipe,
+    showDateTimePipe
   ],
   imports: [
     HttpClientModule,

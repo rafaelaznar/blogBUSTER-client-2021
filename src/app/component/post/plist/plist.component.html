@@ -1,17 +1,16 @@
 <app-menu></app-menu>
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col">
+<div class="container my-3">
+    <div class="row justify-content-center my-3">
+        <div class="col text-start">
             <h2><i class="fas fa-file-alt"></i> Listado de Posts</h2>
         </div>
+        <div class="col text-end">
+            <h4 class="text-muted">{{totalElements}} registros</h4>
+        </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-between">
         <div class="col">
-            <h4>Registros: {{totalElements}}</h4>
-
-
-
             <nav aria-label="pagination">
                 <ul class="pagination">
                     <li class="page-item" aria-current="page" *ngFor="let p of barraPaginacion"
@@ -20,8 +19,8 @@
                     </li>
                 </ul>
             </nav>
-
-
+        </div>
+        <div class="col text-end">
             <div class="dropdown mb-3">
                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -34,41 +33,59 @@
                     <li><a class="dropdown-item" (click)="pageSize=1000;getPage()">1000</a></li>
                 </ul>
             </div>
-
-
-
-            <table class="table table-bordered table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Título</th>
-                        <th>Cuerpo</th>
-                        <th>Fecha</th>
-                        <th>Etiquetas</th>
-                        <th>Visible</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let fila of aPosts">
-                        <td>{{fila.id}}</td>
-                        <td>{{fila.titulo  | trim:5}}</td>
-                        <td>{{fila.cuerpo | trim:44}}</td>
-                        <td>{{fila.fecha}}</td>
-                        <td>{{fila.etiquetas}}</td>
-                        <td>{{fila.visible}}</td>
-                        <td>
-                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                <button type="button" class="btn btn-danger">Left</button>
-                                <button type="button" class="btn btn-warning">Middle</button>
-                                <button type="button" class="btn btn-success">Right</button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-
         </div>
     </div>
+    <div class="row justify-content-center">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Cuerpo</th>
+                    <th>Fecha</th>
+                    <th>Etiquetas</th>
+                    <th>Visible</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let fila of aPosts">
+                    <td>{{fila.id}}</td>
+                    <td>{{fila.titulo | trim:25}}</td>
+                    <td>{{fila.cuerpo | trim:20}}</td>
+                    <td>{{fila.fecha | showDateTime }}</td>
+                    <td>{{fila.etiquetas}}</td>
+                    <td>{{fila.visible}}</td>
+                    <td>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
+                            <button type="button" class="btn btn-success"><i class="fas fa-eye"></i></button>
+                            <button type="button" class="btn btn-warning"><i class="fas fa-pen"></i></button>
+                            <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
+
+<footer>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h6 class="text-muted lead">BLOGBUSTER</h6>
+                <h6 class="text-muted small">
+                    MIT Licensed<br>
+                </h6>
+                <div class="redes-footer small">
+                    <a href="https://github.com/rafaelaznar/blogBUSTER-client-2021">Blogbuster client</a><br>
+                    <a href="https://github.com/rafaelaznar/blogbuster2021.git">Blogbuster server</a>
+                </div>
+                <p class="text-muted small">Rafael Aznar @2021</p>
+            </div>
+
+        </div>
+
+    </div>
+</footer>
