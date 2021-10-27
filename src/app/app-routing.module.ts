@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, resolve: { message: SessionResolver } },
   { path: 'logout', component: LogoutComponent, resolve: { message: SessionResolver } },
   { path: 'secret', component: SecretComponent, resolve: { message: SessionResolver } },
-  { path: 'plist', component: PlistComponent, resolve: { message: SessionResolver } }
+  { path: 'plist', component: PlistComponent, resolve: { message: SessionResolver } }  
 ];
 
 @NgModule({

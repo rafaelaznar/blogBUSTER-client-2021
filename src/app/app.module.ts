@@ -15,6 +15,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { SessionResolver } from './resolve/session.resolve';
 import { PlistComponent } from './component/post/plist/plist.component';
 import { PostService } from './service/post.service';
+import { TrimPipe } from './pipe/trim.pipe';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { PostService } from './service/post.service';
     SecretComponent,
     LogoutComponent,
     MenuComponent,
-    PlistComponent
+    PlistComponent,
+    TrimPipe
   ],
   imports: [
     HttpClientModule,

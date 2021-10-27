@@ -9,7 +9,7 @@
     <div class="row justify-content-center">
         <div class="col">
             <h4>Registros: {{totalElements}}</h4>
-            <h4>Paginas: {{totalPages}}</h4>
+
 
 
             <nav aria-label="pagination">
@@ -22,8 +22,8 @@
             </nav>
 
 
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+            <div class="dropdown mb-3">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
                     data-bs-toggle="dropdown" aria-expanded="false">
                     Registros por página: {{pageSize}}
                 </button>
@@ -37,12 +37,35 @@
 
 
 
-            <table class="table table-striped table-hover">
-                <tr *ngFor="let fila of aPosts">
-                    <td>{{fila.titulo}}</td>
-                    <td>{{fila.etiquetas}}</td>
-                </tr>
-
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Título</th>
+                        <th>Cuerpo</th>
+                        <th>Fecha</th>
+                        <th>Etiquetas</th>
+                        <th>Visible</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let fila of aPosts">
+                        <td>{{fila.id}}</td>
+                        <td>{{fila.titulo  | trim:5}}</td>
+                        <td>{{fila.cuerpo | trim:44}}</td>
+                        <td>{{fila.fecha}}</td>
+                        <td>{{fila.etiquetas}}</td>
+                        <td>{{fila.visible}}</td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                <button type="button" class="btn btn-danger">Left</button>
+                                <button type="button" class="btn btn-warning">Middle</button>
+                                <button type="button" class="btn btn-success">Right</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
 
 
