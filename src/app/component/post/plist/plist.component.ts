@@ -2,14 +2,14 @@ import { PaginationService } from './../../../service/pagination.service';
 import { PostService } from './../../../service/post.service';
 import { Component, OnInit } from '@angular/core';
 import { IPage, IPost } from 'src/app/model/model-interfaces';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-plist',
   templateUrl: './plist.component.html',
   styleUrls: ['./plist.component.css']
 })
-export class PlistComponent implements OnInit {
+export class PlistPostComponent implements OnInit {
 
   aPosts: IPost[];
   totalElements: number;
@@ -18,15 +18,25 @@ export class PlistComponent implements OnInit {
   barraPaginacion: string[];
   pageSize: number = 10;
 
+  strUsuarioSession: string;
 
   constructor(
+    private oRoute: ActivatedRoute,
+    private oRouter: Router,
     private oPaginationService: PaginationService,
-    private oPostService: PostService,
-    private oActivatedRoute: ActivatedRoute
+    private oPostService: PostService,    
   ) {
-    this.page = 1;
-    //this.pageSize = this.oActivatedRoute.snapshot.params.rpp
-    this.getPage();    
+
+    if (this.oRoute.snapshot.data.message) {
+      this.strUsuarioSession = this.oRoute.snapshot.data.message;
+      localStorage.setItem("user", this.oRoute.snapshot.data.message);
+    } else {
+      localStorage.clear();
+      oRouter.navigate(['/home']);
+    }
+
+    this.page = 1;    
+    this.getPage();
   }
 
   ngOnInit(): void {
@@ -39,7 +49,11 @@ export class PlistComponent implements OnInit {
       this.totalPages = oPage.totalPages;
       this.barraPaginacion = this.oPaginationService.pagination(this.totalPages, this.page);
     })
+  }
 
+  jumpToPage = () => {
+    this.getPage();
+    return false;
   }
 
 }

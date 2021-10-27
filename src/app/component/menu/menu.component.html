@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#"><i class="fas fa-kiwi-bird"></i> blogBUSTER-client-2021</a>
+        <a class="navbar-brand" href="#"><img src="assets/img/blogBusterLogo100.png" width="30"> blogBUSTER</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -17,10 +17,7 @@
                 <li class="nav-item" *ngIf="strUsuarioSession">
                     <a class="nav-link" [class.active]="strUrl=='/logout'" [routerLink]="['/logout']"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </li>
-                <li class="nav-item" *ngIf="strUsuarioSession">
-                    <a class="nav-link" [class.active]="strUrl=='/secret'" [routerLink]="['/secret']"><i class="fas fa-key"></i> Secret</a>
-                </li>
-                <li class="nav-item">
+                <li class="nav-item"  *ngIf="strUsuarioSession">
                     <a class="nav-link" [class.active]="strUrl=='/plist'" [routerLink]="['/plist']"><i class="fas fa-file-alt"></i> Posts</a>
                 </li>
 

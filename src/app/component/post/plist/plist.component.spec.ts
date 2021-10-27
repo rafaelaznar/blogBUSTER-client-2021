@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PlistComponent } from './plist.component';
+import { PlistPostComponent } from './plist.component';
 
 describe('PlistComponent', () => {
-  let component: PlistComponent;
-  let fixture: ComponentFixture<PlistComponent>;
+  let component: PlistPostComponent;
+  let fixture: ComponentFixture<PlistPostComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PlistComponent ]
+      declarations: [ PlistPostComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PlistComponent);
+    fixture = TestBed.createComponent(PlistPostComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   }
 
   reset() {
-    this.title = 'blogBUSTER-client-2021';
+    this.title = 'blogBUSTER';
   }
 
   ngOnInit(): void {

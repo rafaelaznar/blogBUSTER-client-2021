@@ -7,27 +7,29 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
 import { HomeComponent } from './component/home/home.component';
-import { SecretComponent } from './component/secret/secret.component';
 import { LogoutComponent } from './component/logout/logout.component';
 import { MenuComponent } from './component/menu/menu.component';
 import { SessionService } from './service/session.service';
 import { HttpClientModule } from "@angular/common/http";
 import { SessionResolver } from './resolve/session.resolve';
-import { PlistComponent } from './component/post/plist/plist.component';
+import { PlistPostComponent } from './component/post/plist/plist.component';
 import { PostService } from './service/post.service';
 import { TrimPipe } from './pipe/trim.pipe';
 import { showDateTimePipe } from './pipe/showDateTime.pipe';
+import { ViewPostComponent } from './component/post/view/view.component';
+import { FooterComponent } from './component/footer/footer.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
-    SecretComponent,
+    HomeComponent,  
     LogoutComponent,
     MenuComponent,
-    PlistComponent,
+    PlistPostComponent,
+    ViewPostComponent,
+    FooterComponent,
     TrimPipe,
     showDateTimePipe
   ],

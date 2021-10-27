@@ -5,7 +5,7 @@ import { API_URL, environment, httpOptions } from 'src/environments/environment'
 
 
 import { catchError, retry, shareReplay, tap } from 'rxjs/operators';
-import { IPage } from '../model/model-interfaces';
+import { IPage, IPost } from '../model/model-interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -32,25 +32,12 @@ export class PostService {
     return throwError(errorMessage);
   }
 
-  login(loginData: String): Observable<String> {
-    if (environment) console.log("SessionService: login");
-    return this.http.post<String>(this.sURL, loginData, httpOptions).pipe(
-      tap((u: String) => console.log("session.service login HTTP request executed", u)),
-      retry(1),
-      catchError(this.handleError));
-  }
-
-  logout(): Observable<String> {
-    if (environment) console.log("SessionService: logout");
-    return this.http.delete<String>(this.sURL, httpOptions).pipe(
-      retry(1),
-      catchError(this.handleError));
-  }
-
-  getPage(rpp: number, page: number): Observable<IPage> {    
+  getPage(rpp: number, page: number): Observable<IPage> {
     return this.http.get<IPage>(this.sURL + "?rpp=" + rpp + "&page=" + page, httpOptions);
   }
 
-
+  getOne(id: number): Observable<IPost> {
+    return this.http.get<IPost>(this.sURL + "?id=" + id, httpOptions);
+  }
 
 }
