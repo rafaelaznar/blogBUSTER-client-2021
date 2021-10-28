@@ -18,6 +18,7 @@ import { TrimPipe } from './pipe/trim.pipe';
 import { showDateTimePipe } from './pipe/showDateTime.pipe';
 import { ViewPostComponent } from './component/post/view/view.component';
 import { FooterComponent } from './component/footer/footer.component';
+import { NewPostComponent } from './component/post/new/new.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { FooterComponent } from './component/footer/footer.component';
     ViewPostComponent,
     FooterComponent,
     TrimPipe,
-    showDateTimePipe
+    showDateTimePipe,
+    NewPostComponent
   ],
   imports: [
     HttpClientModule,

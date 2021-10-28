@@ -6,6 +6,7 @@ import { LogoutComponent } from './component/logout/logout.component';
 import { SessionResolver } from './resolve/session.resolve';
 import { PlistPostComponent } from './component/post/plist/plist.component';
 import { ViewPostComponent } from './component/post/view/view.component';
+import { NewPostComponent } from './component/post/new/new.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, resolve: { message: SessionResolver } },
   { path: 'logout', component: LogoutComponent, resolve: { message: SessionResolver } },  
   { path: 'plist', component: PlistPostComponent, resolve: { message: SessionResolver } },
+  { path: 'new', component: NewPostComponent, resolve: { message: SessionResolver } },
   { path: 'view/:id', component: ViewPostComponent, resolve: { message: SessionResolver } },
 ];
 

@@ -6,9 +6,7 @@ export interface IDate {
 
 export interface ITime {
     hour: number,
-    minute: number,
-    second: number,
-    nano: number
+    minute: number
 }
 
 export interface IFecha {
@@ -29,4 +27,13 @@ export interface IPage {
     content: IPost[];
     totalElements: number,
     totalPages: number
+}
+
+export interface IPost2Send {
+    id: number,
+    titulo: string,
+    cuerpo: string,
+    fecha: string,
+    etiquetas: string,
+    visible: boolean
 }

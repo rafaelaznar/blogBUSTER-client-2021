@@ -1,3 +1,4 @@
+import { IPost2Send } from './../model/model-interfaces';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
@@ -38,6 +39,10 @@ export class PostService {
 
   getOne(id: number): Observable<IPost> {
     return this.http.get<IPost>(this.sURL + "?id=" + id, httpOptions);
+  }
+
+  newOne(oPost: IPost2Send): Observable<number> {
+    return this.http.post<number>(this.sURL, oPost, httpOptions);
   }
 
 }
