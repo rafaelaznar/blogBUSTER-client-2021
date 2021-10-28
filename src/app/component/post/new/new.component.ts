@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IPost, IPost2Send } from 'src/app/model/model-interfaces';
 import { PostService } from 'src/app/service/post.service';
+import { Location } from '@angular/common';
 declare let bootstrap: any;
 
 @Component({
@@ -27,7 +28,8 @@ export class NewPostComponent implements OnInit {
 
   constructor(private oFormBuilder: FormBuilder,
     private oRouter: Router,
-    private oPostService: PostService) { }
+    private oPostService: PostService,
+    private _location: Location) { }
 
   ngOnInit(): void {
   }
@@ -68,6 +70,8 @@ export class NewPostComponent implements OnInit {
     })
   }
 
-
+  goBack() {
+    this._location.back();
+  }
 
 }

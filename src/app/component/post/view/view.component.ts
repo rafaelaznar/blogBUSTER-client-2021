@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IPost } from 'src/app/model/model-interfaces';
 import { PaginationService } from 'src/app/service/pagination.service';
+import { Location } from '@angular/common';
 import { PostService } from 'src/app/service/post.service';
 
 @Component({
@@ -19,7 +20,8 @@ export class ViewPostComponent implements OnInit {
     private oPostService: PostService,
     private oActivatedRoute: ActivatedRoute,
     private oRoute: ActivatedRoute,
-    private oRouter: Router
+    private oRouter: Router,
+    private _location: Location
   ) {
 
     if (this.oRoute.snapshot.data.message) {
@@ -41,7 +43,11 @@ export class ViewPostComponent implements OnInit {
     this.oPostService.getOne(this.id).subscribe((oData: IPost) => {
       this.oPost = oData;
     })
-
   }
+
+  goBack() {
+    this._location.back();
+  }
+
 
 }
