@@ -6,12 +6,9 @@
             <h2><i class="fas fa-file-alt"></i> Listado de Posts</h2>
         </div>
         <div class="col text-end">
-            <h4 class="text-muted">{{totalElements}} registros
-                <a [routerLink]="['/new']" type="button" class="btn btn-success">
-                    <i class="fas fa-plus"></i> Añadir nuevo Post
-                </a>
-            </h4>
-
+            <a [routerLink]="['/new']" type="button" class="btn btn-success">
+                <i class="fas fa-plus"></i> Añadir nuevo Post
+            </a>
         </div>
     </div>
     <div class="row justify-content-between">
@@ -24,6 +21,9 @@
                     </li>
                 </ul>
             </nav>
+        </div>
+        <div class="col text-center">
+            <h4 class="text-muted">{{totalElements}} registros </h4>
         </div>
         <div class="col text-end">
             <div class="dropdown mb-3">
@@ -43,7 +43,7 @@
     <div class="row justify-content-center">
         <table class="table table-bordered table-striped table-hover">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th>ID</th>
                     <th>Título</th>
                     <th>Cuerpo</th>
@@ -61,11 +61,12 @@
                     <td>{{fila.fecha | showDateTime }}</td>
                     <td>{{fila.etiquetas}}</td>
                     <td class="text-center" [innerHTML]="fila.visible | showBoolean"></td>
-                    <td>
+                    <td class="text-center">
                         <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
                             <button type="button" class="btn btn-success" [routerLink]="['/view/' + fila.id]"><i
                                     class="fas fa-eye"></i></button>
-                            <button type="button" class="btn btn-warning" [routerLink]="['/edit/' + fila.id]"><i class="fas fa-pen"></i></button>
+                            <button type="button" class="btn btn-warning" [routerLink]="['/edit/' + fila.id]"><i
+                                    class="fas fa-pen"></i></button>
                             <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                         </div>
                     </td>
