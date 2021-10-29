@@ -65,7 +65,7 @@ export class EditPostComponent implements OnInit {
   update = () => {
     this.oPostService.updateOne(this.oPost2Send).subscribe((id: number) => {
       if (id) {
-        this.oRouter.navigate(['/view/', id]);
+        this.oRouter.navigate(['/view/', this.id]);
       } else {
         this.showModal("Error en la modificación del post")
       }
