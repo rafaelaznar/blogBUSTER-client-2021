@@ -79,7 +79,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary float-end" [disabled]="oForm.invalid">Modificar el
+            <button type="submit" class="btn btn-primary float-end" [disabled]="oForm.invalid || oForm.pristine">Modificar el
                 Post</button>
         </form>
 
