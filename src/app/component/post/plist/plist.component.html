@@ -60,7 +60,7 @@
                     <td>{{fila.cuerpo | trim:20}}</td>
                     <td>{{fila.fecha | showDateTime }}</td>
                     <td>{{fila.etiquetas}}</td>
-                    <td>{{fila.visible}}</td>
+                    <td class="text-center" [innerHTML]="fila.visible | showBoolean"></td>
                     <td>
                         <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
                             <button type="button" class="btn btn-success" [routerLink]="['/view/' + fila.id]"><i

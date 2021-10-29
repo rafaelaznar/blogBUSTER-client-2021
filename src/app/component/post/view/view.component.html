@@ -8,7 +8,7 @@
     </div>
 
     <div class="row justify-content-center">
-        <table class="table table-striped table-sm">
+        <table class="table table-striped">
             <tbody>
                 <tr>
                     <th>ID</th>
@@ -27,8 +27,12 @@
                     <td>{{oPost?.fecha | showDateTime}}</td>
                 </tr>
                 <tr>
+                    <th>Etiquetas</th>
+                    <td>{{oPost?.etiquetas}}</td>
+                </tr>                
+                <tr>
                     <th>Visible</th>
-                    <td>{{oPost?.visible}}</td>
+                    <td [innerHTML]="oPost?.visible | showBoolean"></td>
                 </tr>
             </tbody>
         </table>
