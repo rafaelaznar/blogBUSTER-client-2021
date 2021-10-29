@@ -79,15 +79,16 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary float-end" [disabled]="oForm.invalid || oForm.pristine">Modificar el
+
+            <button type="submit" class="btn btn-primary float-end"
+                [disabled]="oForm.invalid || oForm.pristine">Modificar el
                 Post</button>
         </form>
 
         <div class="control-group text-center mt-5">
             <div class="controls">
                 <a class="btn btn-primary mx-2" [routerLink]="['/home']"><i class="fas fa-home"></i> Ir a home</a>
-                <a class="btn btn-primary mx-2" (click)="goBack()"><i class="fas fa-arrow-circle-left"></i> Volver </a>
-                <button class="btn btn-success" (click)="showModal('bla bla bla ...')">ventana modal</button>
+                <a class="btn btn-primary mx-2" (click)="goBack()"><i class="fas fa-arrow-circle-left"></i> Volver </a>                
             </div>
         </div>
 

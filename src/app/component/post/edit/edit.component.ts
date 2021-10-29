@@ -17,15 +17,24 @@ export class EditPostComponent implements OnInit {
   oPost2Send: IPost2Send = null;
   id: number = null;
   oForm: FormGroup = null;
-
+  strUsuarioSession: string;
 
   get f() { return this.oForm.controls; }
 
   constructor(private oFormBuilder: FormBuilder,
     private oRouter: Router,
+
     private oPostService: PostService,
     private oActivatedRoute: ActivatedRoute,
     private _location: Location) {
+
+    if (this.oActivatedRoute.snapshot.data.message) {
+      this.strUsuarioSession = this.oActivatedRoute.snapshot.data.message;
+      localStorage.setItem("user", this.oActivatedRoute.snapshot.data.message);
+    } else {
+      localStorage.clear();
+      oRouter.navigate(['/home']);
+    }
 
     this.id = this.oActivatedRoute.snapshot.params.id
     this.getOne();
@@ -39,11 +48,17 @@ export class EditPostComponent implements OnInit {
   strModalTittle: string = null;
   strModalBody: string = null;
 
-  showModal = (strModalBody: string) => {
+  showModal = (strModalBody: string, error: boolean) => {
     this.strModalTittle = "blogBUSTER";
     this.strModalBody = strModalBody;
     var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
       keyboard: false
+    })
+    var myModalEl = document.getElementById('myModal')
+    myModalEl.addEventListener('hidden.bs.modal', (event) => {
+      if (!error) {
+        this.oRouter.navigate(['/view/' + this.id]);
+      }
     })
     myModal.show()
   }
@@ -65,9 +80,10 @@ export class EditPostComponent implements OnInit {
   update = () => {
     this.oPostService.updateOne(this.oPost2Send).subscribe((id: number) => {
       if (id) {
-        this.oRouter.navigate(['/view/', this.id]);
+        this.showModal("El post ha sido modificado", false);
+        //this.oRouter.navigate(['/view/', this.id]);
       } else {
-        this.showModal("Error en la modificación del post")
+        this.showModal("Error en la modificación del post", true)
       }
     })
   }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IPost, IPost2Send } from 'src/app/model/model-interfaces';
 import { PostService } from 'src/app/service/post.service';
 import { Location } from '@angular/common';
@@ -14,6 +14,7 @@ declare let bootstrap: any;
 export class NewPostComponent implements OnInit {
 
   oPost: IPost2Send = null;
+  strUsuarioSession: string;
 
   oForm = this.oFormBuilder.group({
     titulo: ['', [Validators.required, Validators.minLength(5)]],
@@ -28,8 +29,19 @@ export class NewPostComponent implements OnInit {
 
   constructor(private oFormBuilder: FormBuilder,
     private oRouter: Router,
+    private oRoute: ActivatedRoute,
     private oPostService: PostService,
-    private _location: Location) { }
+    private _location: Location) {
+
+      if (this.oRoute.snapshot.data.message) {
+        this.strUsuarioSession = this.oRoute.snapshot.data.message;
+        localStorage.setItem("user", this.oRoute.snapshot.data.message);
+      } else {
+        localStorage.clear();
+        oRouter.navigate(['/home']);
+      }
+
+     }
 
   ngOnInit(): void {
   }
