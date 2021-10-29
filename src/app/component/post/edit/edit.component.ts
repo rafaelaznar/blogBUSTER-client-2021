@@ -51,23 +51,23 @@ export class EditPostComponent implements OnInit {
   onSubmit(): void {
     if (this.oForm) {
       this.oPost2Send = {
-        id: null,
+        id: this.oForm.value.id,
         titulo: this.oForm.value.titulo,
         cuerpo: this.oForm.value.cuerpo,
         etiquetas: this.oForm.value.etiquetas,
         fecha: this.oForm.value.fecha + " " + this.oForm.value.hora,
         visible: this.oForm.value.visible
       }
-      this.new();
+      this.update();
     }
   }
 
-  new = () => {
-    this.oPostService.newOne(this.oPost2Send).subscribe((id: number) => {
+  update = () => {
+    this.oPostService.updateOne(this.oPost2Send).subscribe((id: number) => {
       if (id) {
         this.oRouter.navigate(['/view/', id]);
       } else {
-        this.showModal("Error en la creación del registro")
+        this.showModal("Error en la modificación del post")
       }
     })
   }
@@ -93,7 +93,7 @@ export class EditPostComponent implements OnInit {
     this.oPostService.getOne(this.id).subscribe((oData: IPost) => {
       this.oPost2Show = oData;
       this.oForm = this.oFormBuilder.group({
-        id: [this.id],
+        id: [this.oPost2Show.id],
         titulo: [this.oPost2Show.titulo, [Validators.required, Validators.minLength(5)]],
         cuerpo: [this.oPost2Show.cuerpo, Validators.required],
         etiquetas: [this.oPost2Show.etiquetas, Validators.required],

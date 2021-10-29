@@ -45,4 +45,8 @@ export class PostService {
     return this.http.post<number>(this.sURL, oPost, httpOptions);
   }
 
+  updateOne(oPost: IPost2Send): Observable<number> {
+    return this.http.put<number>(this.sURL, oPost, httpOptions);
+  }
+
 }
