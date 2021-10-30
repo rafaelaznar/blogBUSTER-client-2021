@@ -4,7 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IPost, IPost2Send } from 'src/app/model/model-interfaces';
 import { PostService } from 'src/app/service/post.service';
 import { Location } from '@angular/common';
+
 declare let bootstrap: any;
+declare let $: any;
 
 @Component({
   templateUrl: './new.component.html',
@@ -13,7 +15,7 @@ declare let bootstrap: any;
 
 export class NewPostComponent implements OnInit {
 
-  oPost: IPost2Send = null;
+  oPost2Send: IPost2Send = null;
   strUsuarioSession: string;
 
   oForm = this.oFormBuilder.group({
@@ -21,7 +23,6 @@ export class NewPostComponent implements OnInit {
     cuerpo: ['', Validators.required],
     etiquetas: ['', Validators.required],
     fecha: ['', Validators.required],
-    hora: ['', Validators.required],
     visible: ['']
   });
 
@@ -33,39 +34,61 @@ export class NewPostComponent implements OnInit {
     private oPostService: PostService,
     private _location: Location) {
 
-      if (this.oRoute.snapshot.data.message) {
-        this.strUsuarioSession = this.oRoute.snapshot.data.message;
-        localStorage.setItem("user", this.oRoute.snapshot.data.message);
-      } else {
-        localStorage.clear();
-        oRouter.navigate(['/home']);
-      }
+    if (this.oRoute.snapshot.data.message) {
+      this.strUsuarioSession = this.oRoute.snapshot.data.message;
+      localStorage.setItem("user", this.oRoute.snapshot.data.message);
+    } else {
+      localStorage.clear();
+      oRouter.navigate(['/home']);
+    }
 
-     }
+  }
 
   ngOnInit(): void {
+    $('#fecha').datetimepicker({
+      defaultDate: "+1w",
+      numberOfMonths: 1,
+      dateFormat: 'dd-mm-yy',
+      timeFormat: 'hh:mm',
+      showAnim: "fold",
+      onClose: (dateText: string, inst: any) => {
+        this.oForm.controls['fecha'].setValue(dateText);
+        this.oForm.controls['fecha'].markAsDirty();
+      }
+    });
   }
 
   strModalTittle: string = null;
   strModalBody: string = null;
 
-  showModal = (strModalBody: string) => {
+  showModal = (strModalBody: string, url: string = "") => {
     this.strModalTittle = "blogBUSTER";
     this.strModalBody = strModalBody;
     var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
       keyboard: false
     })
+    var myModalEl = document.getElementById('myModal')
+    myModalEl.addEventListener('hidden.bs.modal', (event) => {
+      if (url) {
+        this.oRouter.navigate([url]);
+      }
+    })
     myModal.show()
+  }
+
+
+  getStrFecha2Send = (oFecha: String): string => {
+    return oFecha.split(" ")[0].split("-").reverse().join("-") + " " + oFecha.split(" ")[1];
   }
 
   onSubmit(): void {
     if (this.oForm) {
-      this.oPost = {
+      this.oPost2Send = {
         id: null,
         titulo: this.oForm.value.titulo,
         cuerpo: this.oForm.value.cuerpo,
         etiquetas: this.oForm.value.etiquetas,
-        fecha: this.oForm.value.fecha + " " + this.oForm.value.hora,
+        fecha: this.getStrFecha2Send(this.oForm.value.fecha),
         visible: this.oForm.value.visible
       }
       this.new();
@@ -73,9 +96,9 @@ export class NewPostComponent implements OnInit {
   }
 
   new = () => {
-    this.oPostService.newOne(this.oPost).subscribe((id: number) => {
+    this.oPostService.newOne(this.oPost2Send).subscribe((id: number) => {
       if (id) {
-        this.oRouter.navigate(['/view/', id]);
+        this.showModal("El post se ha creado correctamente", "/view/" + id)
       } else {
         this.showModal("Error en la creación del registro")
       }

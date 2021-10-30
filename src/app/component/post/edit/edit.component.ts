@@ -25,7 +25,6 @@ export class EditPostComponent implements OnInit {
 
   constructor(private oFormBuilder: FormBuilder,
     private oRouter: Router,
-
     private oPostService: PostService,
     private oActivatedRoute: ActivatedRoute,
     private _location: Location) {
@@ -60,7 +59,7 @@ export class EditPostComponent implements OnInit {
   strModalTittle: string = null;
   strModalBody: string = null;
 
-  showModal = (strModalBody: string, error: boolean) => {
+  showModal = (strModalBody: string, url: string = "") => {
     this.strModalTittle = "blogBUSTER";
     this.strModalBody = strModalBody;
     var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
@@ -68,8 +67,8 @@ export class EditPostComponent implements OnInit {
     })
     var myModalEl = document.getElementById('myModal')
     myModalEl.addEventListener('hidden.bs.modal', (event) => {
-      if (!error) {
-        this.oRouter.navigate(['/view/' + this.id]);
+      if (url) {
+        this.oRouter.navigate([url]);
       }
     })
     myModal.show()
@@ -93,9 +92,9 @@ export class EditPostComponent implements OnInit {
   update = () => {
     this.oPostService.updateOne(this.oPost2Send).subscribe((id: number) => {
       if (id) {
-        this.showModal("El post ha sido modificado", false);
+        this.showModal("El post ha sido modificado", "/view/" + this.id);
       } else {
-        this.showModal("Error en la modificación del post", true)
+        this.showModal("Error en la modificación del post")
       }
     })
   }
