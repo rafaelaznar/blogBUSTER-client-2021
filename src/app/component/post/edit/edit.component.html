@@ -45,15 +45,11 @@
             <div class="row mb-3">
                 <label for="fecha" class="col-sm-2 col-form-label">Fecha</label>
                 <div class="col-sm-10">
-                    <input type="date" id="fecha" name="fecha" formControlName="fecha"
-                        [ngClass]="{'is-valid' : f.fecha.dirty && !(f.fecha.errors?.required) }">
-                    <input type="time" id="hora" name="hora" formControlName="hora">
+                    <input type="text" name="fecha" id="fecha" formControlName="fecha" 
+                    class="text ui-widget-content ui-corner-all" /> 
                     <div *ngIf="f.fecha.dirty && f.fecha.errors?.required" class="text-danger">
                         Se debe introducir una fecha correcta
-                    </div>
-                    <div *ngIf="f.hora.dirty && f.hora.errors?.required" class="text-danger">
-                        Se debe introducir una hora correcta
-                    </div>
+                    </div>                
                 </div>
             </div>
 

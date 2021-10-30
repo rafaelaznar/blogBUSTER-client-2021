@@ -4,7 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IFecha, IPost, IPost2Send } from 'src/app/model/model-interfaces';
 import { PostService } from 'src/app/service/post.service';
 import { Location } from '@angular/common';
+
 declare let bootstrap: any;
+declare let $: any;
 
 @Component({
   templateUrl: './edit.component.html',
@@ -42,7 +44,17 @@ export class EditPostComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    $('#fecha').datetimepicker({
+      defaultDate: "+1w",
+      numberOfMonths: 1,
+      dateFormat: 'dd-mm-yy',
+      timeFormat: 'hh:mm',
+      showAnim: "fold",
+      onClose: (dateText: string, inst: any) => {
+        this.oForm.controls['fecha'].setValue(dateText);
+        this.oForm.controls['fecha'].markAsDirty();
+      }
+    });
   }
 
   strModalTittle: string = null;
@@ -70,9 +82,10 @@ export class EditPostComponent implements OnInit {
         titulo: this.oForm.value.titulo,
         cuerpo: this.oForm.value.cuerpo,
         etiquetas: this.oForm.value.etiquetas,
-        fecha: this.oForm.value.fecha + " " + this.oForm.value.hora,
+        fecha: this.getStrFecha2Send(this.oForm.value.fecha), //this.getStrFecha2Send($('#fecha').val()),
         visible: this.oForm.value.visible
       }
+
       this.update();
     }
   }
@@ -81,7 +94,6 @@ export class EditPostComponent implements OnInit {
     this.oPostService.updateOne(this.oPost2Send).subscribe((id: number) => {
       if (id) {
         this.showModal("El post ha sido modificado", false);
-        //this.oRouter.navigate(['/view/', this.id]);
       } else {
         this.showModal("Error en la modificación del post", true)
       }
@@ -96,14 +108,15 @@ export class EditPostComponent implements OnInit {
     }
   }
 
-  getStrFecha = (oFecha: IFecha): string => {
-    return oFecha.date.year + "-" + this.getDoubleDigitStr(oFecha.date.month) + "-" + this.getDoubleDigitStr(oFecha.date.day);
+  getStrFecha2Show = (oFecha: IFecha): string => {
+    return this.getDoubleDigitStr(oFecha.date.day) + "-" + this.getDoubleDigitStr(oFecha.date.month) + "-" + oFecha.date.year + " " + this.getDoubleDigitStr(oFecha.time.hour) + ":" + this.getDoubleDigitStr(oFecha.time.minute);
   }
 
-  getStrHora = (oFecha: IFecha): string => {
-    return this.getDoubleDigitStr(oFecha.time.hour) + ":" + this.getDoubleDigitStr(oFecha.time.minute);
+  getStrFecha2Send = (oFecha: String): string => {
+    return oFecha.split(" ")[0].split("-").reverse().join("-") + " " + oFecha.split(" ")[1];
   }
 
+  fechaHoraPattern = "^([1-9]|([012][0-9])|(3[01]))-([0]{0,1}[1-9]|1[012])-\d\d\d\d [012]{0,1}[0-9]:[0-6][0-9]$"
 
   getOne = () => {
     this.oPostService.getOne(this.id).subscribe((oData: IPost) => {
@@ -113,13 +126,11 @@ export class EditPostComponent implements OnInit {
         titulo: [this.oPost2Show.titulo, [Validators.required, Validators.minLength(5)]],
         cuerpo: [this.oPost2Show.cuerpo, Validators.required],
         etiquetas: [this.oPost2Show.etiquetas, Validators.required],
-        fecha: [this.getStrFecha(this.oPost2Show.fecha), Validators.required],
-        hora: [this.getStrHora(this.oPost2Show.fecha), Validators.required],
+        fecha: [this.getStrFecha2Show(this.oPost2Show.fecha), Validators.required],  //, Validators.pattern(this.fechaHoraPattern)
         visible: [this.oPost2Show.visible]
       });
     })
   }
-
 
   goBack() {
     this._location.back();
