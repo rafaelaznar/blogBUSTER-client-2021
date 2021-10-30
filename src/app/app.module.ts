@@ -21,6 +21,7 @@ import { FooterComponent } from './component/footer/footer.component';
 import { NewPostComponent } from './component/post/new/new.component';
 import { EditPostComponent } from './component/post/edit/edit.component';
 import { showBooleanPipe } from './pipe/showBoolean.pipe';
+import { RemovePostComponent } from './component/post/remove/remove.component';
 
 
 @NgModule({
@@ -32,12 +33,13 @@ import { showBooleanPipe } from './pipe/showBoolean.pipe';
     MenuComponent,
     PlistPostComponent,
     ViewPostComponent,
+    NewPostComponent,
+    EditPostComponent,
+    RemovePostComponent,
     FooterComponent,
     TrimPipe,
     showDateTimePipe,
     showBooleanPipe,
-    NewPostComponent,
-    EditPostComponent
   ],
   imports: [
     HttpClientModule,

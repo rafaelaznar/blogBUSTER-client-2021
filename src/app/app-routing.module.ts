@@ -8,6 +8,7 @@ import { PlistPostComponent } from './component/post/plist/plist.component';
 import { ViewPostComponent } from './component/post/view/view.component';
 import { NewPostComponent } from './component/post/new/new.component';
 import { EditPostComponent } from './component/post/edit/edit.component';
+import { RemovePostComponent } from './component/post/remove/remove.component';
 
 
 const routes: Routes = [
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'plist', component: PlistPostComponent, resolve: { message: SessionResolver } },
   { path: 'new', component: NewPostComponent, resolve: { message: SessionResolver } },
   { path: 'view/:id', component: ViewPostComponent, resolve: { message: SessionResolver } },
-  { path: 'edit/:id', component: EditPostComponent, resolve: { message: SessionResolver } }
+  { path: 'edit/:id', component: EditPostComponent, resolve: { message: SessionResolver } },
+  { path: 'remove/:id', component: RemovePostComponent, resolve: { message: SessionResolver } }
 ];
 
 @NgModule({

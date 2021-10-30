@@ -17,22 +17,6 @@ export class PostService {
 
   sURL = API_URL + '/post';
 
-  onCheck = new EventEmitter<any>();
-
-  handleError(error: HttpErrorResponse) {
-    let errorMessage = 'Unknown error!';
-    if (error.error instanceof ErrorEvent) {
-      // Client-side errors
-      errorMessage = `Error: ${error.error.message}`;
-      if (environment) console.log("SessionService: error: " + errorMessage);
-    } else {
-      // Server-side errors
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-      if (environment) console.log("SessionService: error: " + errorMessage);
-    }
-    return throwError(errorMessage);
-  }
-
   getPage(rpp: number, page: number): Observable<IPage> {
     return this.http.get<IPage>(this.sURL + "?rpp=" + rpp + "&page=" + page, httpOptions);
   }
@@ -48,5 +32,10 @@ export class PostService {
   updateOne(oPost: IPost2Send): Observable<number> {
     return this.http.put<number>(this.sURL, oPost, httpOptions);
   }
+
+  removeOne(id: number): Observable<number> {
+    return this.http.delete<number>(this.sURL + "?id=" + id, httpOptions);
+  }
+
 
 }

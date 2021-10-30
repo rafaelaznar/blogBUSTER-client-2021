@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { ViewPostComponent } from './view.component';
+import { RemovePostComponent } from './remove.component';
 
 describe('ViewComponent', () => {
-  let component: ViewPostComponent;
-  let fixture: ComponentFixture<ViewPostComponent>;
+  let component: RemovePostComponent;
+  let fixture: ComponentFixture<RemovePostComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewPostComponent ]
+      declarations: [ RemovePostComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewPostComponent);
+    fixture = TestBed.createComponent(RemovePostComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
