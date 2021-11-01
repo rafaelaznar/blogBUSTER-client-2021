@@ -24,12 +24,14 @@ import { showBooleanPipe } from './pipe/showBoolean.pipe';
 import { RemovePostComponent } from './component/post/remove/remove.component';
 import { ModalComponent } from './component/modal/modal.component';
 import { DateTimeService } from './service/datetime.service';
+import { HeaderComponent } from './component/header/header.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ModalComponent,
+    HeaderComponent,
     FooterComponent,
     MenuComponent,
     LoginComponent,

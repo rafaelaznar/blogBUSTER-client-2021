@@ -1,11 +1,9 @@
 <app-menu></app-menu>
 
 <div class="container my-3">
-    <div class="row justify-content-center my-3">
-        <div class="col text-start">
-            <h2><i class="fas fa-plus"></i> Nuevo Post</h2>
-        </div>
-    </div>
+    
+    <app-header [title]="'Nuevo Post'" [icon]="'fas fa-plus'"></app-header>
+
     <div class="row justify-content-center">
 
         <form novalidate [formGroup]="oForm" (ngSubmit)="onSubmit()">
