@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IFecha, IPost, IPost2Send } from 'src/app/model/model-interfaces';
+import { IPost, IPost2Send } from 'src/app/model/model-interfaces';
 import { PostService } from 'src/app/service/post.service';
 import { Location } from '@angular/common';
+import { Subject } from 'rxjs';
+import { DateTimeService } from 'src/app/service/datetime.service';
 
-declare let bootstrap: any;
 declare let $: any;
 
 @Component({
@@ -19,19 +20,22 @@ export class EditPostComponent implements OnInit {
   oPost2Send: IPost2Send = null;
   id: number = null;
   oForm: FormGroup = null;
-  strUsuarioSession: string;
+  strResult: string = null;
 
   get f() { return this.oForm.controls; }
 
-  constructor(private oFormBuilder: FormBuilder,
+  constructor(
+    private oFormBuilder: FormBuilder,
     private oRouter: Router,
     private oPostService: PostService,
     private oActivatedRoute: ActivatedRoute,
-    private _location: Location) {
+    private oLocation: Location,
+    private oDateTimeService: DateTimeService
+    ) {
 
     if (this.oActivatedRoute.snapshot.data.message) {
-      this.strUsuarioSession = this.oActivatedRoute.snapshot.data.message;
-      localStorage.setItem("user", this.oActivatedRoute.snapshot.data.message);
+      const strUsuarioSession: string = this.oActivatedRoute.snapshot.data.message;
+      localStorage.setItem("user", strUsuarioSession);
     } else {
       localStorage.clear();
       oRouter.navigate(['/home']);
@@ -56,22 +60,18 @@ export class EditPostComponent implements OnInit {
     });
   }
 
-  strModalTittle: string = null;
-  strModalBody: string = null;
-
-  showModal = (strModalBody: string, url: string = "") => {
-    this.strModalTittle = "blogBUSTER";
-    this.strModalBody = strModalBody;
-    var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
-      keyboard: false
+  getOne = ():void => {
+    this.oPostService.getOne(this.id).subscribe((oData: IPost) => {
+      this.oPost2Show = oData;
+      this.oForm = this.oFormBuilder.group({
+        id: [this.oPost2Show.id],
+        titulo: [this.oPost2Show.titulo, [Validators.required, Validators.minLength(5)]],
+        cuerpo: [this.oPost2Show.cuerpo, Validators.required],
+        etiquetas: [this.oPost2Show.etiquetas, Validators.required],
+        fecha: [this.oDateTimeService.getStrFecha2Show(this.oPost2Show.fecha), Validators.required],  //, Validators.pattern(this.fechaHoraPattern)
+        visible: [this.oPost2Show.visible]
+      });
     })
-    var myModalEl = document.getElementById('myModal')
-    myModalEl.addEventListener('hidden.bs.modal', (event) => {
-      if (url) {
-        this.oRouter.navigate([url]);
-      }
-    })
-    myModal.show()
   }
 
   onSubmit(): void {
@@ -81,7 +81,7 @@ export class EditPostComponent implements OnInit {
         titulo: this.oForm.value.titulo,
         cuerpo: this.oForm.value.cuerpo,
         etiquetas: this.oForm.value.etiquetas,
-        fecha: this.getStrFecha2Send(this.oForm.value.fecha), //this.getStrFecha2Send($('#fecha').val()),
+        fecha: this.oDateTimeService.getStrFecha2Send(this.oForm.value.fecha), //this.getStrFecha2Send($('#fecha').val()),
         visible: this.oForm.value.visible
       }
 
@@ -89,50 +89,31 @@ export class EditPostComponent implements OnInit {
     }
   }
 
-  update = () => {
-    this.oPostService.updateOne(this.oPost2Send).subscribe((id: number) => {
-      if (id) {
-        this.showModal("El post ha sido modificado", "/view/" + this.id);
+  update = ():void => {
+    this.oPostService.updateOne(this.oPost2Send).subscribe((result: number) => {
+      if (result) {
+        this.strResult = "El post se ha modificado correctamente";
       } else {
-        this.showModal("Error en la modificación del post")
+        this.strResult = "Error en la modificación del post";
       }
+      this.openModal();
     })
   }
 
-  getDoubleDigitStr = (nData: number): string => {
-    if (nData <= 9) {
-      return "0" + nData;
-    } else {
-      return "" + nData;
-    }
+  goBack():void {
+    this.oLocation.back();
   }
 
-  getStrFecha2Show = (oFecha: IFecha): string => {
-    return this.getDoubleDigitStr(oFecha.date.day) + "-" + this.getDoubleDigitStr(oFecha.date.month) + "-" + oFecha.date.year + " " + this.getDoubleDigitStr(oFecha.time.hour) + ":" + this.getDoubleDigitStr(oFecha.time.minute);
+  //modal
+
+  eventsSubject: Subject<void> = new Subject<void>();
+
+  openModal():void {
+    this.eventsSubject.next();
   }
 
-  getStrFecha2Send = (oFecha: String): string => {
-    return oFecha.split(" ")[0].split("-").reverse().join("-") + " " + oFecha.split(" ")[1];
-  }
-
-  fechaHoraPattern = "^([1-9]|([012][0-9])|(3[01]))-([0]{0,1}[1-9]|1[012])-\d\d\d\d [012]{0,1}[0-9]:[0-6][0-9]$"
-
-  getOne = () => {
-    this.oPostService.getOne(this.id).subscribe((oData: IPost) => {
-      this.oPost2Show = oData;
-      this.oForm = this.oFormBuilder.group({
-        id: [this.oPost2Show.id],
-        titulo: [this.oPost2Show.titulo, [Validators.required, Validators.minLength(5)]],
-        cuerpo: [this.oPost2Show.cuerpo, Validators.required],
-        etiquetas: [this.oPost2Show.etiquetas, Validators.required],
-        fecha: [this.getStrFecha2Show(this.oPost2Show.fecha), Validators.required],  //, Validators.pattern(this.fechaHoraPattern)
-        visible: [this.oPost2Show.visible]
-      });
-    })
-  }
-
-  goBack() {
-    this._location.back();
+  closeModal():void {
+    this.oRouter.navigate(["/view/" + this.id]);
   }
 
 }

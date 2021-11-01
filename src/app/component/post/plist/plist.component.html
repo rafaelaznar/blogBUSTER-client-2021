@@ -11,6 +11,7 @@
             </a>
         </div>
     </div>
+
     <div class="row justify-content-between">
         <div class="col">
             <nav aria-label="pagination">
@@ -40,39 +41,43 @@
             </div>
         </div>
     </div>
+
     <div class="row justify-content-center">
-        <table class="table table-bordered table-striped table-hover">
-            <thead>
-                <tr class="text-center">
-                    <th>ID</th>
-                    <th>Título</th>
-                    <th>Cuerpo</th>
-                    <th>Fecha</th>
-                    <th>Etiquetas</th>
-                    <th>Visible</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let fila of aPosts">
-                    <td>{{fila.id}}</td>
-                    <td>{{fila.titulo | trim:25}}</td>
-                    <td>{{fila.cuerpo | trim:20}}</td>
-                    <td>{{fila.fecha | showDateTime }}</td>
-                    <td>{{fila.etiquetas}}</td>
-                    <td class="text-center" [innerHTML]="fila.visible | showBoolean"></td>
-                    <td class="text-center">
-                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
-                            <button type="button" class="btn btn-success" [routerLink]="['/view/' + fila.id]"><i
-                                    class="fas fa-eye"></i></button>
-                            <button type="button" class="btn btn-warning" [routerLink]="['/edit/' + fila.id]"><i
-                                    class="fas fa-pen"></i></button>
-                            <button type="button" class="btn btn-danger" [routerLink]="['/remove/' + fila.id]"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="col-md table-responsive-md">
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr class="text-center">
+                        <th>ID</th>
+                        <th>Título</th>
+                        <th>Cuerpo</th>
+                        <th>Fecha</th>
+                        <th>Etiquetas</th>
+                        <th>Visible</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let fila of aPosts">
+                        <td>{{fila.id}}</td>
+                        <td>{{fila.titulo | trim:25}}</td>
+                        <td>{{fila.cuerpo | trim:20}}</td>
+                        <td>{{fila.fecha | showDateTime }}</td>
+                        <td>{{fila.etiquetas}}</td>
+                        <td class="text-center" [innerHTML]="fila.visible | showBoolean"></td>
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
+                                <button type="button" class="btn btn-success" [routerLink]="['/view/' + fila.id]"><i
+                                        class="fas fa-eye"></i></button>
+                                <button type="button" class="btn btn-warning" [routerLink]="['/edit/' + fila.id]"><i
+                                        class="fas fa-pen"></i></button>
+                                <button type="button" class="btn btn-danger" [routerLink]="['/remove/' + fila.id]"><i
+                                        class="fas fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

@@ -22,21 +22,24 @@ import { NewPostComponent } from './component/post/new/new.component';
 import { EditPostComponent } from './component/post/edit/edit.component';
 import { showBooleanPipe } from './pipe/showBoolean.pipe';
 import { RemovePostComponent } from './component/post/remove/remove.component';
+import { ModalComponent } from './component/modal/modal.component';
+import { DateTimeService } from './service/datetime.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    ModalComponent,
+    FooterComponent,
+    MenuComponent,
     LoginComponent,
     HomeComponent,  
     LogoutComponent,
-    MenuComponent,
     PlistPostComponent,
     ViewPostComponent,
     NewPostComponent,
     EditPostComponent,
     RemovePostComponent,
-    FooterComponent,
     TrimPipe,
     showDateTimePipe,
     showBooleanPipe,
@@ -52,7 +55,8 @@ import { RemovePostComponent } from './component/post/remove/remove.component';
     SessionService,
     SessionResolver,
     PostService,
-    PaginationService
+    PaginationService,
+    DateTimeService
   ],
   bootstrap: [AppComponent]
 })

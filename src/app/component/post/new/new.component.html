@@ -70,20 +70,21 @@
             </div>
 
             <div class="row mb-3 justify-content-center">
-                <div class="control-group text-center">
+                <div class="d-grid gap-2 d-md-block mt-3 d-md-flex justify-content-md-center">
                     <button type="submit" class="btn btn-warning" [disabled]="oForm.invalid || oForm.pristine">Crear
-                        nuevo
-                        Post</button>
+                        nuevo Post</button>
                 </div>
             </div>
 
         </form>
 
         <div class="control-group text-center mt-5">
-            <div class="controls">
-                <a class="btn btn-primary mx-2" [routerLink]="['/home']"><i class="fas fa-home"></i> Ir a home</a>
+            <div class="d-grid gap-2 d-md-block mt-3 d-md-flex justify-content-md-center">
+                <a class="btn btn-primary mx-2" [routerLink]="['/home']"><i class="fas fa-home"></i> Página
+                    principal</a>
+                <a class="btn btn-primary mx-2" [routerLink]="['/plist']"><i class="fas fa-file-alt"></i> Listado de
+                    Posts</a>
                 <a class="btn btn-primary mx-2" (click)="goBack()"><i class="fas fa-arrow-circle-left"></i> Volver </a>
-                <button class="btn btn-success" (click)="showModal('bla bla bla ...')">ventana modal</button>
             </div>
         </div>
 
@@ -92,20 +93,4 @@
 
 <app-footer></app-footer>
 
-
-<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{strModalTittle}}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                {{strModalBody}}
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
+<app-modal [show]="eventsSubject.asObservable()" [body]="strResult" (close)="closeModal()"> </app-modal>

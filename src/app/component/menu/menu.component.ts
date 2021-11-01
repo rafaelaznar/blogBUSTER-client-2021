@@ -7,9 +7,12 @@ import { NavigationEnd, Router } from '@angular/router';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+  
   strUsuarioSession: String;
   strUrl:String="";
+
   constructor(private router: Router) {    
+    
     this.strUsuarioSession = localStorage.getItem("user");
 
     this.router.events.subscribe((ev) => {
@@ -17,6 +20,7 @@ export class MenuComponent implements OnInit {
         this.strUrl=ev.url ;
       }
     })
+    
   }
 
   ngOnInit(): void {
