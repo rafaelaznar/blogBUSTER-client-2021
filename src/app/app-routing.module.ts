@@ -9,6 +9,7 @@ import { ViewPostComponent } from './component/post/view/view.component';
 import { NewPostComponent } from './component/post/new/new.component';
 import { EditPostComponent } from './component/post/edit/edit.component';
 import { RemovePostComponent } from './component/post/remove/remove.component';
+import { ReadComponent } from './component/read/read.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'new', component: NewPostComponent, resolve: { message: SessionResolver } },
   { path: 'view/:id', component: ViewPostComponent, resolve: { message: SessionResolver } },
   { path: 'edit/:id', component: EditPostComponent, resolve: { message: SessionResolver } },
-  { path: 'remove/:id', component: RemovePostComponent, resolve: { message: SessionResolver } }
+  { path: 'remove/:id', component: RemovePostComponent, resolve: { message: SessionResolver } },
+  { path: 'read/:id', component: ReadComponent, resolve: { message: SessionResolver } },
 ];
 
 @NgModule({

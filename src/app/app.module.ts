@@ -25,6 +25,7 @@ import { RemovePostComponent } from './component/post/remove/remove.component';
 import { ModalComponent } from './component/modal/modal.component';
 import { DateTimeService } from './service/datetime.service';
 import { HeaderComponent } from './component/header/header.component';
+import { ReadComponent } from './component/read/read.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { HeaderComponent } from './component/header/header.component';
     LoginComponent,
     HomeComponent,  
     LogoutComponent,
+    ReadComponent,
     PlistPostComponent,
     ViewPostComponent,
     NewPostComponent,

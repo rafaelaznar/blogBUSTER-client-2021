@@ -21,7 +21,7 @@ export class ViewPostComponent implements OnInit {
     private oActivatedRoute: ActivatedRoute,
     private oRoute: ActivatedRoute,
     private oRouter: Router,
-    private _location: Location
+    private oLocation: Location
   ) {
 
     if (this.oRoute.snapshot.data.message) {
@@ -46,7 +46,7 @@ export class ViewPostComponent implements OnInit {
   }
 
   goBack() {
-    this._location.back();
+    this.oLocation.back();
   }
 
 
