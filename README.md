@@ -9,3 +9,5 @@ https://www.telerik.com/blogs/how-to-lazy-load-component-angular
 
 https://www.dotnettricks.com/learn/angular/sharing-data-between-angular-components-methods
 
+http://blog.enriqueoriol.com/2017/05/comunicacion-servicio-componente-en-angular.html
+
