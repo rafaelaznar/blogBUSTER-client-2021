@@ -2,9 +2,29 @@
 
 <div class="container my-3">
 
-    <app-header [title]="'Listado de Posts'" [icon]="'fas fa-file-alt'" [subtitle]="totalElements + ' posts'"></app-header>
+    <app-header [title]="'Listado de Posts'" [icon]="'fas fa-file-alt'" [subtitle]="totalElements + ' posts'">
+    </app-header>
 
-
+    <div class="row justify-content-center my-3">
+        <div class="col-12 d-grid gap-2 d-md-block d-md-flex justify-content-md-center">
+            <form style="width: 50%;">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <button class="btn-primary btn" (click)="doFilter()" [disabled]="filtered">
+                            <i class="fas fa-search"></i> Filtrar
+                        </button>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Buscador de posts" [(ngModel)]="filterActual"
+                        name="buscar" (keydown)="onKeydownEvent($event)" />
+                    <div class="input-group-append">
+                        <button class="btn-primary btn" (click)="doResetFilter()" [disabled]="!filtered">Quitar
+                            filtro
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <div class="row justify-content-between">
         <div class="col-md">
@@ -17,10 +37,10 @@
                 </ul>
             </nav>
         </div>
-        <div class="col-md text-center">            
+        <div class="col-md text-center">
             <a [routerLink]="['/new']" type="button" class="btn btn-success mb-2">
                 <i class="fas fa-plus"></i> Añadir nuevo Post
-            </a>                  
+            </a>
         </div>
         <div class="col-md text-end">
             <div class="dropdown mb-3">
@@ -43,12 +63,46 @@
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <tr class="text-center">
-                        <th>ID</th>
-                        <th>Título</th>
-                        <th>Cuerpo</th>
-                        <th>Fecha</th>
-                        <th>Etiquetas</th>
-                        <th>Visible</th>
+                        <th (click)="doSetOrder('id')">ID
+                            <i class="fas fa-arrow-up" *ngIf="currentSortField=='id'&&currentSortDirection=='asc'"></i>
+                            <i class="fas fa-arrow-down"
+                                *ngIf="currentSortField=='id'&&currentSortDirection=='desc'"></i>
+                        </th>
+                        <th (click)="doSetOrder('titulo')">Título
+                            <i class="fas fa-arrow-up"
+                                *ngIf="currentSortField=='titulo'&&currentSortDirection=='asc'"></i>
+                            <i class="fas fa-arrow-down"
+                                *ngIf="currentSortField=='titulo'&&currentSortDirection=='desc'"></i>
+
+                        </th>
+                        <th (click)="doSetOrder('cuerpo')">Cuerpo
+                            <i class="fas fa-arrow-up"
+                                *ngIf="currentSortField=='cuerpo'&&currentSortDirection=='asc'"></i>
+                            <i class="fas fa-arrow-down"
+                                *ngIf="currentSortField=='cuerpo'&&currentSortDirection=='desc'"></i>
+
+                        </th>
+                        <th (click)="doSetOrder('fecha')">Fecha
+                            <i class="fas fa-arrow-up"
+                                *ngIf="currentSortField=='fecha'&&currentSortDirection=='asc'"></i>
+                            <i class="fas fa-arrow-down"
+                                *ngIf="currentSortField=='fecha'&&currentSortDirection=='desc'"></i>
+
+                        </th>
+                        <th (click)="doSetOrder('etiquetas')">Etiquetas
+                            <i class="fas fa-arrow-up"
+                                *ngIf="currentSortField=='etiquetas'&&currentSortDirection=='asc'"></i>
+                            <i class="fas fa-arrow-down"
+                                *ngIf="currentSortField=='etiquetas'&&currentSortDirection=='desc'"></i>
+
+                        </th>
+                        <th (click)="doSetOrder('visible')">Visible
+                            <i class="fas fa-arrow-up"
+                                *ngIf="currentSortField=='visible'&&currentSortDirection=='asc'"></i>
+                            <i class="fas fa-arrow-down"
+                                *ngIf="currentSortField=='visible'&&currentSortDirection=='desc'"></i>
+
+                        </th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -64,6 +118,8 @@
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
                                 <button type="button" class="btn btn-success" [routerLink]="['/view/' + fila.id]"><i
                                         class="fas fa-eye"></i></button>
+                                <button type="button" class="btn btn-success" (click)="showViewModal(fila.id)"><i
+                                        class="fas fa-search"></i></button>
                                 <button type="button" class="btn btn-warning" [routerLink]="['/edit/' + fila.id]"><i
                                         class="fas fa-pen"></i></button>
                                 <button type="button" class="btn btn-danger" [routerLink]="['/remove/' + fila.id]"><i
@@ -78,3 +134,7 @@
 </div>
 
 <app-footer></app-footer>
+
+<app-modal [show]="eventsSubjectModal.asObservable()" [body]="strResult" (close)="closeModal()" [size]="'xl'">
+    <app-post-look [show]="eventsSubjectView.asObservable()"></app-post-look>
+</app-modal>

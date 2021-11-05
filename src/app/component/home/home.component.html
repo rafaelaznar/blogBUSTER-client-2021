@@ -17,7 +17,7 @@
             <div class="card my-5" *ngFor="let fila of aPosts">
                 <div class="card-body">
                     <h5 class="card-title"><a [routerLink]="['/read/' + fila.id]">{{fila.titulo}}</a></h5>
-                    <p class="card-text">{{fila.cuerpo}}</p>
+                    <p class="card-text">{{fila.cuerpo|trim:300}}</p>
                 </div>
                 <div class="card-footer text-muted">
                     <div class="row justify-content-center">

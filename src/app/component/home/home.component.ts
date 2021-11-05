@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
   }
 
   getPage = () => {
-    this.oPostService.getPage(this.pageSize, this.page).subscribe((oPage: IPage) => {
+    this.oPostService.getPage(this.pageSize, this.page, "", 'fecha', 'desc').subscribe((oPage: IPage) => {
       this.aPosts = oPage.content;
       this.totalElements = oPage.totalElements;
       this.totalPages = oPage.totalPages;

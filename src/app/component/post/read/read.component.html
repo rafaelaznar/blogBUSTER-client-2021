@@ -13,24 +13,7 @@
   </div>
 
   <div class="row justify-content-center">
-    <div class="col-md-7">
-      <div class="card my-5">
-        <div class="card-body">
-          <h1 class="card-title my-5">{{oPost?.titulo}}</h1>
-          <p class="card-text my-5">{{oPost?.cuerpo}}</p>
-        </div>
-        <div class="card-footer text-muted">
-          <div class="row justify-content-center">
-            <div class="col-md text-start">
-              {{oPost?.etiquetas}}
-            </div>
-            <div class="col-md text-end">
-              {{oPost?.fecha | showDateTime }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <app-post-look [show]="eventsSubjectView.asObservable()"></app-post-look>
   </div>
 
   <div class="d-grid gap-2 d-md-block mt-3 d-md-flex justify-content-md-center mt-5">

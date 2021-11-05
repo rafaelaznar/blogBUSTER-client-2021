@@ -9,7 +9,7 @@ import { ViewPostComponent } from './component/post/view/view.component';
 import { NewPostComponent } from './component/post/new/new.component';
 import { EditPostComponent } from './component/post/edit/edit.component';
 import { RemovePostComponent } from './component/post/remove/remove.component';
-import { ReadComponent } from './component/read/read.component';
+import { ReadComponent } from './component/post/read/read.component';
 
 
 const routes: Routes = [

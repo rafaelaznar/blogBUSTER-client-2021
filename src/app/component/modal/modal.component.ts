@@ -17,6 +17,7 @@ export class ModalComponent implements OnInit {
   @Input() show: Observable<void>;
   @Input() title: string = "blogBUSTER";
   @Input() body: string = "";
+  @Input() size: string = "";
   @Input() mode: boolean = false; // false->cerrar; true->si/no (no implementado)
 
   /*

@@ -4,6 +4,7 @@ import { IPost } from 'src/app/model/model-interfaces';
 import { PaginationService } from 'src/app/service/pagination.service';
 import { PostService } from 'src/app/service/post.service';
 import { Location } from '@angular/common';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-read',
@@ -14,9 +15,11 @@ export class ReadComponent implements OnInit {
 
   id: number = 0;
   oPost: IPost;
+  eventsSubjectView: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  
 
   constructor(
-    private oActivatedRoute: ActivatedRoute,    
+    private oActivatedRoute: ActivatedRoute,
     private oPostService: PostService,
     private oLocation: Location
   ) {
@@ -31,7 +34,8 @@ export class ReadComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  ngOnInit() {  
+    this.eventsSubjectView.next(this.id);    
   }
 
   goBack() {
@@ -40,7 +44,7 @@ export class ReadComponent implements OnInit {
 
   getOne = () => {
     this.oPostService.getOne(this.id).subscribe((oData: IPost) => {
-      this.oPost = oData;
+      this.oPost = oData;      
     })
   }
 

@@ -17,9 +17,18 @@ export class PostService {
 
   sURL = API_URL + '/post';
 
-  getPage(rpp: number, page: number): Observable<IPage> {
-    return this.http.get<IPage>(this.sURL + "?rpp=" + rpp + "&page=" + page, httpOptions);
+  getPage(rpp: number, page: number, filter: string, order: string, direction: string): Observable<IPage> {
+    let strFilterUrl: string = "";
+    let strOrderUrl: string = "";
+    if (filter) {
+      strFilterUrl += "&filter=" + filter;
+    }
+    if (order) {
+      strOrderUrl += "&order=" + order + "&dir=" + direction;
+    }
+    return this.http.get<IPage>(this.sURL + "?rpp=" + rpp + "&page=" + page + strFilterUrl + strOrderUrl, httpOptions);
   }
+
 
   getOne(id: number): Observable<IPost> {
     return this.http.get<IPost>(this.sURL + "?id=" + id, httpOptions);

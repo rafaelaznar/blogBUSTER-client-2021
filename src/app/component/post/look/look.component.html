@@ -1,0 +1,20 @@
+<div class="row justify-content-center">
+  <div class="col">
+    <div class="card my-5">
+      <div class="card-body">
+        <h3 class="card-title my-5">{{oPost?.titulo}}</h3>
+        <p class="card-text my-5">{{oPost?.cuerpo}}</p>
+      </div>
+      <div class="card-footer text-muted">
+        <div class="row justify-content-center">
+          <div class="col-md text-start">
+            {{oPost?.etiquetas}}
+          </div>
+          <div class="col-md text-end">
+            {{oPost?.fecha | showDateTime }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
